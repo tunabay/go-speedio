@@ -1,14 +1,9 @@
-# go-speedio
+// Copyright (c) 2020 Hirotsuna Mizuno. All rights reserved.
+// Use of this source code is governed by the MIT license that can be found in
+// the LICENSE file.
 
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tunabay/go-speedio/blob/master/LICENSE)
-[![GoDoc](https://godoc.org/github.com/tunabay/go-speedio?status.svg)](https://godoc.org/github.com/tunabay/go-speedio)
+package speedio_test
 
-speedio is a Go package implementing bit rate limiting and bit rate
-measurement. It wraps an `io.Reader` or `io.Writer` object.
-
-## Usage
-
-```
 import (
 	"fmt"
 	"io/ioutil"
@@ -17,7 +12,8 @@ import (
 	"github.com/tunabay/go-speedio"
 )
 
-func main() {
+//
+func ExampleWriter_devNull() {
 
 	// /dev/null writer with rate limit of 256 bit/s
 	w, err := speedio.NewWriter(ioutil.Discard, 256)
@@ -55,14 +51,3 @@ func main() {
 	fmt.Println("elapsed time:", et)
 	fmt.Println("total bit rate:", br)
 }
-```
-[Run in Go Playground](https://play.golang.org/p/Xgk0kMHqGgi)
-
-## Documentation
-
-- http://godoc.org/github.com/tunabay/go-speedio
-
-## License
-
-go-speedio is available under the MIT license. See the [LICENSE](LICENSE) file
-for more information.

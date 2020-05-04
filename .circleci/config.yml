@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    branches:
+      ignore:
+        - /doc-.*/
+    docker:
+      - image: circleci/golang:1.14.2
+    parallelism: 1
+    environment:
+      GOPRIVATE: "github.com/tunabay/"
+    steps:
+      - checkout
+      - run:
+          name: "go lint"
+          command: |
+            ./.ci/scripts/golang-lint.sh
+      - run:
+          name: "go unit tests"
+          command: |
+            go test -gcflags="-e" -timeout=10m -race -coverprofile=coverage.txt -covermode=atomic -v ./...
+            echo 'bash <(curl -s https://codecov.io/bash)'
+      - store_artifacts:
+          path: /tmp/artifacts

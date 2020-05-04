@@ -1,0 +1,4 @@
+github.com/tunabay/go-infounit v1.1.0 h1:gqEC6DlwOC8hgKhQSKdIV/56B3VJDnEpJC0wKlGwjag=
+github.com/tunabay/go-infounit v1.1.0/go.mod h1:eDwEBW5n8fSLYC4txk7crBhD37xF6gFm5rktKyYH72c=
+github.com/tunabay/go-randdata v0.1.0 h1:QSxbD7DAgpM8+RQmoEenTOiOVUr1q51+Ek4FBz0f2dM=
+github.com/tunabay/go-randdata v0.1.0/go.mod h1:1ahZXZ3r2qQ1Yb8Jr2s7Joe8EwlHtkdoYnVE+H5Vok0=
