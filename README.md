@@ -18,7 +18,6 @@ import (
 )
 
 func main() {
-
 	// /dev/null writer with rate limit of 256 bit/s
 	w, err := speedio.NewWriter(ioutil.Discard, 256)
 	if err != nil {
@@ -56,7 +55,7 @@ func main() {
 	fmt.Println("total bit rate:", br)
 }
 ```
-[Run in Go Playground](https://play.golang.org/p/Xgk0kMHqGgi)
+[Run in Go Playground](https://play.golang.org/p/mAIH6Jh5_kF)
 
 ## Documentation
 

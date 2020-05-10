@@ -14,7 +14,6 @@ import (
 
 //
 func ExampleWriter_devNull() {
-
 	// /dev/null writer with rate limit of 256 bit/s
 	w, err := speedio.NewWriter(ioutil.Discard, 256)
 	if err != nil {
