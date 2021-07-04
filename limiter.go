@@ -43,17 +43,17 @@ func newLimiter(rate infounit.BitRate, resolution, maxWait time.Duration) (*limi
 func (l *limiter) set(tc time.Time, rate infounit.BitRate, resolution, maxWait time.Duration) error {
 	switch {
 	case rate < 0:
-		return fmt.Errorf("negative bit rate %v", rate)
+		return fmt.Errorf("%w: negative bit rate %v", ErrInvalidParameter, rate)
 	case rate == 0:
-		return fmt.Errorf("zero bit rate")
+		return fmt.Errorf("%w: zero bit rate", ErrInvalidParameter)
 	case resolution < 0:
-		return fmt.Errorf("negative resolution %s", resolution)
+		return fmt.Errorf("%w: negative resolution %s", ErrInvalidParameter, resolution)
 	case resolution == 0:
-		return fmt.Errorf("zero resolution")
+		return fmt.Errorf("%w: zero resolution", ErrInvalidParameter)
 	case maxWait < 0:
-		return fmt.Errorf("negative max-wait %s", maxWait)
+		return fmt.Errorf("%w: negative max-wait %s", ErrInvalidParameter, maxWait)
 	case maxWait == 0:
-		return fmt.Errorf("zero max-wait")
+		return fmt.Errorf("%w: zero max-wait", ErrInvalidParameter)
 	}
 
 	newRate := float64(rate) / 8
@@ -62,9 +62,9 @@ func (l *limiter) set(tc time.Time, rate infounit.BitRate, resolution, maxWait t
 
 	switch {
 	case infounit.ByteCount(newBurst) < 1:
-		return fmt.Errorf("rate and/or resolution is too small: rate=%v, reso=%s", rate, resolution)
+		return fmt.Errorf("%w: rate and/or resolution is too small: rate=%v, reso=%s", ErrInvalidParameter, rate, resolution)
 	case newMinPartial < 1:
-		return fmt.Errorf("rate and/or max-wait is too small: rate=%v, wait=%s", rate, maxWait)
+		return fmt.Errorf("%w: rate and/or max-wait is too small: rate=%v, wait=%s", ErrInvalidParameter, rate, maxWait)
 	}
 
 	l.mu.Lock()

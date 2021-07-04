@@ -36,15 +36,15 @@ type meterItem struct {
 func newMeter(resolution, sample time.Duration) (*meter, error) {
 	switch {
 	case resolution <= 0:
-		return nil, fmt.Errorf("invalid resolution %d", resolution)
+		return nil, fmt.Errorf("%w: resolution %d <= 0", ErrInvalidParameter, resolution)
 	case resolution < MinMeterResolution:
-		return nil, fmt.Errorf("too small resolution %d", resolution)
+		return nil, fmt.Errorf("%w: resolution %d < minMeterResolution", ErrInvalidParameter, resolution)
 	case sample <= 0:
-		return nil, fmt.Errorf("invalid sample %d", sample)
+		return nil, fmt.Errorf("%w: sample %d <= 0", ErrInvalidParameter, sample)
 	}
 	n := int(sample / resolution)
 	if n < 2 {
-		return nil, fmt.Errorf("too small sample duration %s (at least %s)", sample, resolution*2)
+		return nil, fmt.Errorf("%w: too small sample duration %s (at least %s)", ErrInvalidParameter, sample, resolution*2)
 	}
 	m := &meter{
 		resolution: resolution,

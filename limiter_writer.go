@@ -5,7 +5,6 @@
 package speedio
 
 import (
-	"fmt"
 	"io"
 	"sync"
 	"time"
@@ -113,7 +112,6 @@ func (w *LimiterWriter) Write(p []byte) (int, error) {
 	for 0 < len(p) {
 		tc := time.Now()
 		wd, abc := w.lim.request(tc, len(p))
-		// fmt.Printf("DEBUG: len=%d, wd=%s, allowed=%d, total=%d\n", len(p), wd, abc, written)
 		if 0 < wd {
 			timer := time.NewTimer(wd)
 			select {
@@ -122,7 +120,7 @@ func (w *LimiterWriter) Write(p []byte) (int, error) {
 				if !timer.Stop() {
 					<-timer.C
 				}
-				return written, fmt.Errorf("closed")
+				return written, ErrClosed
 			}
 		}
 		n, err := w.wr.Write(p[:abc])
@@ -133,7 +131,7 @@ func (w *LimiterWriter) Write(p []byte) (int, error) {
 			return written, err
 		}
 		if n == 0 {
-			return written, fmt.Errorf("zero bytes written")
+			return written, ErrZeroWrite
 		}
 		written += n
 		p = p[n:]
