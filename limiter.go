@@ -41,7 +41,6 @@ func newLimiter(rate infounit.BitRate, resolution, maxWait time.Duration) (*limi
 
 //
 func (l *limiter) set(tc time.Time, rate infounit.BitRate, resolution, maxWait time.Duration) error {
-
 	switch {
 	case rate < 0:
 		return fmt.Errorf("negative bit rate %v", rate)
