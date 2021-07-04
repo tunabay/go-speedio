@@ -1,0 +1,55 @@
+run:
+  timeout: 5m
+  tests: false
+  skip-dirs-use-default: true
+
+linters:
+  disable-all: true
+  fast: false
+  enable:
+    - deadcode
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    - unused
+    - varcheck
+    - asciicheck
+    - bodyclose
+    - dogsled
+    - errorlint
+    - exportloopref
+    - forbidigo
+    - forcetypeassert
+    - goconst
+    - gocritic
+    - godot
+    - goerr113
+    - gofmt
+    - gofumpt
+    - goimports
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - ifshort
+    - importas
+    - misspell
+    - nakedret
+    - nolintlint
+    - prealloc
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - stylecheck
+    - unconvert
+    - unparam
+    - wastedassign
+    - whitespace
+
+issues:
+  max-issues-per-linter: 1023
+  max-same-issues: 255
+  fix: false
