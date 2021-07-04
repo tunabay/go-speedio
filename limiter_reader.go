@@ -5,7 +5,6 @@
 package speedio
 
 import (
-	"fmt"
 	"io"
 	"sync"
 	"time"
@@ -116,7 +115,7 @@ func (r *LimiterReader) Read(p []byte) (int, error) {
 			if !timer.Stop() {
 				<-timer.C
 			}
-			return 0, fmt.Errorf("closed")
+			return 0, ErrClosed
 		}
 	}
 	n, err := r.rd.Read(p[:abc])
